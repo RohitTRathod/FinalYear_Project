@@ -1,0 +1,52 @@
+{% extends 'myapp/base.html' %} 
+{% block body %}
+
+ 
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+    </div>
+    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+
+      <div class="max-w-md mx-auto">
+        <div>
+          <h1 class="text-2xl font-semibold">Register</h1>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+        <div class="mb-2">
+            <label >Username</label>
+            <div class="border rounded py-2 px-2 mr-10 max-w-md">
+                {{ user_form.username }}
+            </div>
+        </div>
+        <div class="mb-2">
+            <label >Email</label>
+            <div class="border rounded py-2 px-2 mr-10">
+                {{ user_form.email }}
+            </div>
+        </div>
+        <div class="mb-2">
+            <label >Password</label>
+            <div class="border rounded py-2 px-2 mr-10">
+                {{ user_form.password }}
+            </div>
+        </div>
+        <div class="mb-2">
+            <label >Confirm Password</label>
+            <div class="border rounded py-2 px-2 mr-10">
+                {{ user_form.password2 }}
+            </div>
+        </div>
+        <button class="bg-green-500 text-white px-4 py-2" type="submit">Create user</button>
+    </form>
+     <p class="m-10"> Already registered ? <span> <a class="text-indigo-500" href="{% url 'login' %}">Click here</a> to login</p></span>
+
+    </div>
+  </div>
+</div>
+  
+
+
+{% endblock %}

@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SeedSense</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0fff0 0%, #b0eacb 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #134e07;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 3rem 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(34, 139, 34, 0.2);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #1a9a32;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    form p {
+      text-align: left;
+      margin: 0;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+      color: #134e07;
+    }
+
+    form input[type="text"],
+    form input[type="number"],
+    form select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #1a9a32;
+      border-radius: 10px;
+      background-color: #f0fbf6;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button[type="submit"] {
+      margin-top: 1.2rem;
+      background-color: #1a9a32;
+      color: #ffffff;
+      border: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(26, 154, 50, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #127820;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 2rem;
+      background-color: #e1fbe1;
+      padding: 1.2rem 1.5rem;
+      border-radius: 14px;
+      color: #065e0e;
+      font-size: 1.3rem;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(26, 154, 50, 0.3);
+    }
+
+    @media(max-width: 480px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .result {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Crop Recommendation System</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Recommend</button>
+  </form>
+
+  {% if prediction %}
+    <div class="result">Recommended Crop: <b>{{ prediction }}</b></div>
+  {% endif %}
+</div>
+
+</body>
+</html>

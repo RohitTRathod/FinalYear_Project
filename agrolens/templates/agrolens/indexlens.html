@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agrolens </title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #dcedd9 0%, #a6ddb3 100%);
+    color: #134e07;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .container {
+    background: #f0fbf6;
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgb(26 154 50 / 0.25);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  h1 {
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    color: #1a9a32;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  input[type="file"] {
+    border: 2px dashed #1a9a32;
+    padding: 2rem 1rem;
+    border-radius: 16px;
+    cursor: pointer;
+    background-color: #e6f4e6;
+    color: #134e07;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    outline-offset: 4px;
+  }
+  input[type="file"]:hover,
+  input[type="file"]:focus {
+    background-color: #c6ecc4;
+    border-color: #127820;
+    outline: none;
+  }
+
+  button[type="submit"] {
+    background-color: #1a9a32;
+    color: #f0fdfa;
+    border: none;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgb(26 154 50 / 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    user-select: none;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: #127820;
+    box-shadow: 0 14px 40px rgb(26 154 50 / 0.85);
+    outline: none;
+    transform: scale(1.05);
+  }
+
+  .prediction-result {
+    margin-top: 2.5rem;
+    background-color: #dff5dd;
+    color: #1a531a;
+    border-radius: 17px;
+    padding: 1.5rem 2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgb(26 154 50 / 0.4);
+    user-select: none;
+    max-width: 100%;
+    word-wrap: break-word; /* Ensures long words break and don't overflow */
+    text-align: center; /* Centers the text */
+    overflow-wrap: break-word; /* Ensures words break on overflow */
+  }
+
+  @media(max-width: 480px) {
+    .container {
+      padding: 2rem 1.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+    input[type="file"] {
+      padding: 1.5rem 1rem;
+      font-size: 1rem;
+    }
+    button[type="submit"] {
+      font-size: 1.2rem;
+      padding: 0.9rem 2rem;
+    }
+    .prediction-result {
+      font-size: 1.2rem;
+      padding: 1rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container" role="main" aria-labelledby="page-title">
+  <h1 id="page-title">Upload a Leaf Image</h1>
+  <form method="post" enctype="multipart/form-data" aria-describedby="form-instruction" onsubmit="showProcessing()">
+    {% csrf_token %}
+    <input type="file" name="image" accept="image/*" id="imageInput" aria-required="true" aria-describedby="fileHelp" />
+    <small id="fileHelp" style="color:#134e07; font-weight:600;">Choose a clear photo of the leaf</small>
+    <button type="submit" aria-label="Submit image for prediction">Predict</button>
+  </form>
+
+  <div id="predictionResult" class="prediction-result" role="alert" aria-live="polite"
+       {% if not predicted_class %}hidden{% endif %}>
+    {% if predicted_class %}
+      Prediction: {{ predicted_class }}
+    {% else %}
+      Processing...
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  function showProcessing() {
+    const imageInput = document.getElementById('imageInput');
+    const predictionResult = document.getElementById('predictionResult');
+
+    if (!imageInput.files || imageInput.files.length === 0) {
+      alert('Please select an image before submitting.');
+      event.preventDefault();
+      return false;
+    }
+
+    // Show "Processing..." before submission
+    predictionResult.hidden = false;
+    predictionResult.textContent = 'Prediction: Processing...';
+  }
+</script>
+
+</body>
+</html>

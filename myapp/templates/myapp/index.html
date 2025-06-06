@@ -1,0 +1,486 @@
+{% extends 'myapp/base.html' %}
+
+    
+
+{% block body %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agrixpert - The Complete Farmer Companion</title>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  /* Reset and base styling */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+ 
+
+
+  /*  Carousel Section Styles */
+  .aquatic-section {
+    width: 100vw;
+    position: relative;
+    background: linear-gradient(135deg, #8bc34a 0%, #4caf50 100%);
+    border-radius: 0 0 20px 20px;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  .aquatic-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .aquatic-text-wrapper {
+    flex: 0 0 400px;
+    max-width: 400px;
+    padding: 2rem;
+    color: #f1f8e9;
+    font-size: 1rem;
+    background: rgba(255 255 255 / 0.15);
+    border-radius: 14px;
+    border: 1.5px solid #c5e1a5;
+    box-shadow: 0 4px 20px rgba(20, 70, 10, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .aquatic-text-wrapper h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .aquatic-text-wrapper p {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .sign-in-button {
+    background-color: #aed581;
+    color: #1b3d04;
+    padding: 0.7rem 1.8rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    align-self: start;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    user-select: none;
+    text-decoration: none;
+    text-align: center;
+  }
+  .sign-in-button:hover,
+  .sign-in-button:focus {
+    background-color: #8bc34a;
+    outline: none;
+    transform: scale(1.05);
+    color: #0f2500;
+  }
+  .aquatic-swiper {
+    flex: 1 1 auto;
+    max-width: 800px;
+    height: 320px;
+    border-radius: 15px;
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 250px;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+  .swiper-slide h2 {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    margin: 0;
+    color: #fff;
+    font-size: 1.3rem;
+    background-color: rgba(0, 0, 0, 0.55);
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    font-weight: 600;
+    user-select: none;
+  }
+  .swiper-pagination-bullet {
+    background: #f1f8e9;
+    opacity: 0.7;
+  }
+  .swiper-pagination-bullet-active {
+    background: #dcedc8;
+    opacity: 1;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 1150px) {
+    .aquatic-text-wrapper {
+      flex: 0 0 300px;
+      max-width: 300px;
+      padding: 1.5rem 1.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .aquatic-text-wrapper h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .swiper-slide {
+      width: 220px;
+      height: 280px;
+    }
+    .aquatic-swiper {
+      height: 280px;
+    }
+  }
+  @media (max-width: 900px) {
+    .aquatic-section {
+      padding: 1rem 0.5rem 2rem;
+    }
+    .aquatic-container {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .aquatic-text-wrapper,
+    .aquatic-swiper {
+      flex: 1 1 100%;
+      max-width: 100%;
+      margin-bottom: 1.5rem;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+    .swiper-slide {
+      width: 200px;
+      height: 250px;
+    }
+    .aquatic-swiper {
+      height: 250px;
+    }
+  }
+  
+  .apps-section {
+  background: #f8fdfa;
+  border-radius: 28px;
+  box-shadow: 0 10px 40px rgba(33, 100, 33, 0.15);
+  max-width: 1000px;
+  width: 100%;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+  .apps-section h3 {
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    color: #2e652e;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Only 2 columns per row */
+  gap: 2.5rem;
+  justify-items: center; /* Optional: centers items in their columns */
+  }
+
+
+  .app-box {
+    background: #e6f1e2;
+    border-radius: 22px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 6px 20px rgba(46, 139, 46, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #225322;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+    user-select: none;
+  }
+  .app-box:hover, .app-box:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 38px rgba(46, 139, 46, 0.35);
+  }
+
+  .app-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.8rem;
+    fill: #3a8d3a;
+    filter: drop-shadow(0 0 5px #3a8d3aaa);
+    user-select: none;
+  }
+
+  .app-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .app-desc {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #3f662f;
+  }
+ 
+  
+    .apps-section {
+      padding: 2rem 1rem;
+    }
+    .apps-section h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .app-box {
+      padding: 2rem 1.5rem;
+    }
+    .app-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .app-desc {
+      font-size: 1rem;
+    }
+    .center-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* full height of viewport */
+    background-color: #f0f9f0; /* optional: background */
+    padding: 1rem; /* prevents edge clipping on small screens */
+    }
+  
+</style>
+</head>
+<body>
+
+<main>
+
+  <!--  side-by-side carousel section full width -->
+  <section class="aquatic-section" aria-label="Aquatic Life Carousel">
+    <div class="aquatic-container">
+      <div class="aquatic-text-wrapper" tabindex="0">
+        <h1>Agrixpert</h1>
+        <p>
+          Buy,sell and optimize agricluture with AI-driven insights.Your one-stop
+          solution for modern farming!
+        </p>
+        <a href="{% url 'register' %}" class="sign-in-button" tabindex="0" aria-label="Sign in to Agrixpert">Get Started</a>
+      </div>
+      <div class="aquatic-swiper swiper">
+        <div class="swiper-wrapper">
+          <div
+            class="swiper-slide"
+            style="background-image: url('https://t4.ftcdn.net/jpg/03/77/49/23/360_F_377492305_VVTpITK0XYNnySHgnkxVoHPuUcKs64WR.jpg?auto=format&fit=crop&w=700&q=80');"
+            aria-label="Jellyfish"
+            role="group"
+            tabindex="-1"
+          >
+            <h2>Tomato</h2>
+          </div>
+          <div
+            class="swiper-slide"
+            style="background-image: url('https://img.freepik.com/premium-photo/green-grapes-black-background-with-reflection_798657-712.jpg?auto=format&fit=crop&w=700&q=80');"
+            aria-label="Seahorse"
+            role="group"
+            tabindex="-1"
+          >
+            <h2>Grapes</h2>
+          </div>
+          <div
+            class="swiper-slide"
+            style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/004/899/074/small_2x/tasty-fresh-red-pomegranate-on-a-dark-concrete-background-photo.jpg?auto=format&fit=crop&w=700&q=80');"
+            aria-label="Octopus"
+            role="group"
+            tabindex="-1"
+          >
+            <h2>Pomegranate</h2>
+          </div>
+          <div
+            class="swiper-slide"
+            style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPof9a9gkMSc4Xs7FG-L2ysodbzqOn0flHoA&s?auto=format&fit=crop&w=700&q=80');"
+            aria-label="Shark"
+            role="group"
+            tabindex="-1"
+          >
+            <h2>Mango</h2>
+          </div>
+          <div
+            class="swiper-slide"
+            style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH0-A-dk_qFi9z1lEnrcNXF5pICpqSpI39pw&s?auto=format&fit=crop&w=700&q=80');"
+            aria-label="Dolphin"
+            role="group"
+            tabindex="-1"
+          >
+            <h2>Bell Pepper</h2>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="center-wrapper">
+  <section class="apps-section" aria-labelledby="appsTitle">
+  <h3 id="appsTitle">Innovative Farmer Companion Apps</h3>
+  <div class="apps-grid">
+    <a href="{% url 'recommend_crop' %}"><article class="app-box" tabindex="0" aria-label="Crop Recommendation App">
+      <svg class="app-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="#3a8d3a"/>
+        <path fill="#e6f3e6" d="M21 32a11 11 0 0 1 22 0v7H21v-7z"/>
+        <circle cx="32" cy="45" r="6" fill="#a7d0a5"/>
+      </svg>
+      <h4 class="app-title">Crop Recommendation</h4>
+      <p class="app-desc">Personalized planting guidance based on soil, weather, and market data to maximize yields.</p>
+    </article></a>
+    <a href="{% url 'predict_yield' %}">
+      <article class="app-box" tabindex="0" aria-label="Yield Prediction App">
+      <svg class="app-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="#3a8d3a"/>
+        <path fill="#e6f3e6" d="M44 40l-5-20-6 10-6-12-6 18H44z"/>
+        <circle cx="32" cy="45" r="6" fill="#a7d0a5"/>
+      </svg>
+      <h4 class="app-title">Yield Prediction</h4>
+      <p class="app-desc">AI-powered estimates to help plan and optimize resource use throughout your crop cycle.</p>
+    </article>
+    </a>
+    <a href="{% url 'indexlens' %}">
+      <article class="app-box" tabindex="0" aria-label="Plant Disease Detection App">
+      <svg class="app-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="#3a8d3a"/>
+        <path fill="#e6f3e6" d="M28 20h8v16h-8z"/>
+        <path fill="#a7d0a5" d="M22 36h20v8H22z"/>
+      </svg>
+      <h4 class="app-title">Plant Disease Detection</h4>
+      <p class="app-desc">Rapid AI diagnosis of pests and diseases using images and sensor data.</p>
+    </article>
+    </a>
+    <a href="{% url 'predict_churn' %}">
+      <article class="app-box" tabindex="0" aria-label="Churn Prediction App">
+      <svg class="app-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="#3a8d3a"/>
+        <path fill="#e6f3e6" d="M42 24a10 10 0 1 1-20 0 10 10 0 0 1 20 0z"/>
+        <path fill="#a7d0a5" d="M32 40v8a12 12 0 0 0 0-24v8z"/>
+      </svg>
+      <h4 class="app-title">Churn Prediction</h4>
+      <p class="app-desc">Insights on farmer retention helping improve support and community engagement.</p>
+    </article>
+    </a>
+  </div>
+</section>
+</div>
+  
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".swiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    loop: true,
+    slidesPerView: "auto",
+    coverflowEffect: {
+      rotate: 0,
+      stretch: 0,
+      depth: 100,
+      modifier: 2.5,
+      slideShadows: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<div class="p-1 flex flex-wrap items-center justify-center">
+    {% for product in products %}
+    <div class="flex-shrink-0 m-6 relative overflow-hidden rounded-lg max-w-xs shadow-lg group product-card" id="product-{{ forloop.counter }}">
+        <svg class="absolute bottom-0 left-0 mb-8 scale-150 group-hover:scale-[1.65] transition-transform"
+            viewBox="0 0 375 283" fill="none" style="opacity: 0.1;">
+            <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
+            <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
+        </svg>
+        <div class="relative pt-10 px-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
+            </div>
+            <img class="relative w-50 h-60" src="{{ product.image }}" alt="">
+        </div>
+        <div class="relative text-white px-6 pb-6 mt-6">
+            <span class="block opacity-75 -mb-1">&#8377 {{ product.price }}/Kg </span>
+            <div class="flex justify-between">
+                <span class="block font-semibold text-xl">{{ product.name }}</span>
+                <span class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center"><a href="   {%  url 'detail' product.id %}">Buy</a></span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const colors = ["bg-orange-500", "bg-green-500", "bg-blue-500", "bg-pink-500", "bg-yellow-500"];
+        const productCards = document.querySelectorAll(".product-card");
+
+        productCards.forEach((card, index) => {
+            const colorClass = colors[index % colors.length];
+            card.classList.add(colorClass);
+        });
+    });
+</script>
+   
+
+   
+
+   
+
+
+
+
+{% endblock %}
+
+
+    
+
+
+
